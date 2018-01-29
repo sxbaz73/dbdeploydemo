@@ -1,0 +1,6 @@
+
+WHENEVER SQLERROR EXIT ROLLBACK ;
+
+SELECT sysdate FROM dual
+/
+exit
