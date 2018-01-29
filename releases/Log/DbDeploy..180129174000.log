@@ -1,0 +1,14 @@
+
+Log file is /c/GIT/dbdeploydemo/releases//Log/DbDeploy..180129174000.log
+
+Change Request is 
+
+Mode is 
+
+Database is 
+
+Database schema is 
+
+
+Usage: FEARdeploy.pl <ChangeRequest> <Mode> <Database> <Schema> <Password> 
+
