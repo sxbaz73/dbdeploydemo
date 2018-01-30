@@ -1,0 +1,4 @@
+DBC134_emp_tab_deploy.sql
+DBC138_emp_tab_bot.sql
+DBC140_emp_tab_test.sql
+DBC143_emp_tab_bo.sql

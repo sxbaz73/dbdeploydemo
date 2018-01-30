@@ -1,0 +1,6 @@
+
+WHENEVER SQLERROR EXIT ROLLBACK ;
+
+ALTER TABLE emp DROP (bonus)
+/
+exit

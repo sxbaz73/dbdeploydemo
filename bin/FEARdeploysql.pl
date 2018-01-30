@@ -18,15 +18,19 @@ my $argCount = $#ARGV +1;
 
 my $pwd    = qx/pwd/;
 my $pwdC   = chomp $pwd;
-logMessage("pwd is $pwd\n");
+#logMessage("pwd is $pwd\n");
 my $deployDIR = $pwd . "/releases\/$opt_r";
-
+logMessage("deployDIR is $deployDIR\n");
 # Setup and initialise variables for logging
-
-my $ds     = strftime "%y%m%d%H%M%S", localtime;
-my $logDir = $deployDIR . "/Log";
-my $logFile = $logDir . "/DbDeploy" . "\." . $opt_r . "\." . $ds .  "\." . "log";
-
+my $ds     = strftime ("%y%m%d%H%M%S", localtime);
+#logMessage("ds is $ds\n");
+my $logDir = "$deployDIR" . "/Log";
+#logMessage("logDir is $logDir\n");
+my $logStream = $logDir . "/DbDeploy" . "\." . $opt_r . "\." . $ds .  "\." . "log";
+#logMessage("here1\n");
+#my $logStream = "$logDir\/test.log";
+system printf "here!";
+logMessage("here1\n");
 # will change for each export
 my $changeRequestNo = $opt_r;
 
@@ -62,19 +66,21 @@ my @sortedSqlFEAR = ();
 mainExpProcessing();
 
 # Write final log messahr
-logMessage("Log file is $logFile\n");
+logMessage("Log file is $logStream\n");
 
 ##################################### SUBROUTINE DEFINITIONS #########################################
 sub logMessage {
    # This subroutine prints out the message to the screen and appends it to the log file
-   system "printf \"@_\n\" | tee -a $logFile";
+   system "printf \"@_\n\" | tee -a $logStream";
 } 
 
 sub mainExpProcessing {
 
+logMessage("here2");
     # Make sure the log directory has been created and start logging
     mkpath ("$deployDIR/Log", 0, 0777);
-    logMessage("\nLog file is $logFile\n");
+
+    logMessage("\nLog file is $logStream\n");
     logMessage("Change Request is $opt_r\n");
     logMessage("Mode is $opt_mode\n") ;
     logMessage("Database is $opt_db\n");
@@ -285,10 +291,10 @@ sub sortSQL {
 		   
          }
 
-   #      logMessage("\nNo. of dep1oy scripts = $deployCount");
-    ##     logMessage("No. of test scripts = $testCount");
-      #   logMessage("No. of backout scripts = $backoutCount");
-       #  logMessage("No. of backout test scripts = $botCount");
+         logMessage("\nNo. of dep1oy scripts       = $deployCount");
+         logMessage("No. of test scripts         = $testCount");
+         logMessage("No. of backout scripts      = $backoutCount");
+         logMessage("No. of backout test scripts = $botCount");
          # Create one unified array of sql in sort order
          push (@returnArray, @seq);
          push (@returnArray, @tab);
@@ -314,19 +320,20 @@ sub sortSQL {
          push (@returnArray, @val_t);
          push (@returnArray, @misc_t);
 
-         push (@returnArray, @seq_bo);
-         push (@returnArray, @tab_bo);
-         push (@returnArray, @type_bo);
-         push (@returnArray, @ind_bo);
-         push (@returnArray, @idx_bo);
-         push (@returnArray, @head_bo);
-         push (@returnArray, @view_bo);
-         push (@returnArray, @pack_bo);
-         push (@returnArray, @trig_bo);
-         push (@returnArray, @val_bo);
+         #Backout in reverse order
          push (@returnArray, @misc_bo);
+         push (@returnArray, @val_bo);
+         push (@returnArray, @trig_bo);
+         push (@returnArray, @pack_bo);
+         push (@returnArray, @view_bo);
+         push (@returnArray, @head_bo);
+         push (@returnArray, @idx_bo);
+         push (@returnArray, @ind_bo);
+         push (@returnArray, @type_bo);
+         push (@returnArray, @tab_bo);
+         push (@returnArray, @seq_bo);
 
-
+		 
          push (@returnArray, @seq_bot);
          push (@returnArray, @tab_bot);
          push (@returnArray, @type_bot);

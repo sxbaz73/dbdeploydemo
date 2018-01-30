@@ -1,0 +1,28 @@
+
+Log file is /c/GIT/dbdeploydemo/releases/TestRelease1/Log/DbDeploy.TestRelease1.180129202558.log
+
+Change Request is TestRelease1
+
+Mode is ALL
+
+Database is test
+
+Database schema is barry
+
+test_trig_deploy.sql
+
+Running... sqlplus -s barry/<PASSWORD>@test @/c/GIT/dbdeploydemo/releases/TestRelease1/sql/test_trig_deploy.sql;
+
+SYSDATE
+---------
+29-JAN-18
+
+
+
+No. of deploy errors     = 0
+No. of test errors         = 0
+No. of backout errors      = 0
+No. of backout test errors = 0
+Total NO. of errors = 0
+Log file is /c/GIT/dbdeploydemo/releases/TestRelease1/Log/DbDeploy.TestRelease1.180129202558.log
+
