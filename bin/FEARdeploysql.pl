@@ -27,10 +27,6 @@ my $ds     = strftime ("%y%m%d%H%M%S", localtime);
 my $logDir = "$deployDIR" . "/Log";
 #logMessage("logDir is $logDir\n");
 my $logStream = $logDir . "/DbDeploy" . "\." . $opt_r . "\." . $ds .  "\." . "log";
-#logMessage("here1\n");
-#my $logStream = "$logDir\/test.log";
-system printf "here!";
-logMessage("here1\n");
 # will change for each export
 my $changeRequestNo = $opt_r;
 
@@ -76,7 +72,6 @@ sub logMessage {
 
 sub mainExpProcessing {
 
-logMessage("here2");
     # Make sure the log directory has been created and start logging
     mkpath ("$deployDIR/Log", 0, 0777);
 
@@ -151,15 +146,17 @@ logMessage("here2");
             { 
                 logMessage("\nSkipping... $sqlscript");
             }
-
-            logMessage("\nNo. of deploy errors     = $errorCountDeploy");
-            logMessage("No. of test errors         = $errorCountTest" ) ;
-            logMessage("No. of backout errors      = $errorCountBO");
-            logMessage("No. of backout test errors = $errorCountBOT");
-            logMessage("Total NO. of errors = $errorCount");
-
-            die "\n\There are $errorCount errors in the $opt_r release.\n\n\t$0 " if ($errorCount > 0);
         }
+
+		
+        logMessage("\nNo. of deploy errors     = $errorCountDeploy");
+        logMessage("No. of test errors         = $errorCountTest" ) ;
+        logMessage("No. of backout errors      = $errorCountBO");
+        logMessage("No. of backout test errors = $errorCountBOT");
+        logMessage("Total NO. of errors = $errorCount");
+
+		die "\n\There are $errorCount errors in the $opt_r release.\n\n\t$0 " if ($errorCount > 0);
+
 	}		
 }
 
